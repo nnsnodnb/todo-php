@@ -60,14 +60,21 @@ $(function(){
 	});
 });
 
-// 完了にチェックをすることでの操作
+// 完了にチェック解除をすることでの操作
 function chkClick() {
-　if (formTest.chkTest.checked) {
-　　location.href="index.html#end";
+　if (!finishform.finish.checked) {
+　　location.href="index.html#finishcheck";
 　}
 }
-/*  HTML例
-<form act="test.cgi" name="formTest" method="post">
-  <input type="checkbox" name="chkTest" value="1" onClick="chkClick()">
-</form>
-*/
+
+// 完了にチェックをすることでの操作
+function chkClick_b() {
+　if (finishform_b.finish_b.checked) {
+　　location.href="index.html#finishcheck";
+　}
+}
+
+// jQueryでどのブラウザにもカレンダー表示を対応
+$(function() {
+  $("#datepicker").datepicker();
+});
