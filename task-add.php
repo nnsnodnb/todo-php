@@ -25,7 +25,7 @@
       <div class="navbar navbar-default navbar-fixed-top">
         <div class="container">
           <div class="navbar-header">
-            <a href="index.html" class="navbar-brand">ToDo管理</a>
+            <a href="index.php" class="navbar-brand">ToDo管理</a>
             <button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#navbar-main">
               <span class="icon-bar"></span>
               <span class="icon-bar"></span>
@@ -34,8 +34,8 @@
           </div>
           <div class="navbar-collapse collapse" id="navbar-main">
             <ul class="nav navbar-nav">
-              <li><a href="index.html">タスク一覧</a></li>
-              <li class="active"><a href="task-add.html">タスク登録</a></li>
+              <li><a href="index.php">タスク一覧</a></li>
+              <li class="active"><a href="task-add.php">タスク登録</a></li>
             </ul>
           </div>
         </div>
@@ -73,7 +73,7 @@
                 </div>
                 <div class="form-group form-submit">
                   <div class="col-sm-10 col-sm-offset-2">
-                    <a href="index.html">
+                    <a href="index.php">
                       <button type="button" class="btn btn-info" name="button">戻る</button>
                     </a>
                     <input type="reset" class="btn btn-default" value="キャンセル">

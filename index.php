@@ -22,7 +22,7 @@
       <div class="navbar navbar-default navbar-fixed-top">
         <div class="container">
           <div class="navbar-header">
-            <a href="index.html" class="navbar-brand">ToDo管理</a>
+            <a href="index.php" class="navbar-brand">ToDo管理</a>
             <button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#navbar-main">
               <span class="icon-bar"></span>
               <span class="icon-bar"></span>
@@ -31,8 +31,8 @@
           </div>
           <div class="navbar-collapse collapse" id="navbar-main">
             <ul class="nav navbar-nav">
-              <li class="active"><a href="index.html">タスク一覧</a></li>
-              <li><a href="task-add.html">タスク登録</a></li>
+              <li class="active"><a href="index.php">タスク一覧</a></li>
+              <li><a href="task-add.php">タスク登録</a></li>
             </ul>
           </div>
         </div>
@@ -44,7 +44,7 @@
 
         <div class="col-sm-12">
           <h1>タスク一覧</h1>
-          <a href="task-add.html">
+          <a href="task-add.php">
             <button type="button" class="btn btn-info" style="margin-top: 23px;"><i class="fa fa-pencil"></i> 登録</button>
           </a>
         </div>
@@ -66,12 +66,12 @@
               <td data-href="#finish">2015/8/29</td>
               <td data-href="#finish">高</td>
               <td align="center">
-                <form action="index.html" name="finishform" method="POST">
+                <form action="index.php" name="finishform" method="POST">
                   <input type="checkbox" name="finish" value="1" onClick="chkClick()" checked>
                 </form>
               </td>
               <td align="center">
-                <form action="index.html" method="POST">
+                <form action="index.php" method="POST">
                   <input type="checkbox" name="delete" id="check-delete">
                   <input type="hidden" name="delete-key" value="">
                   <input type="submit" id="delete-submit" class="btn btn-xs btn-danger" value="削除" onClick="return confirm('本当に削除しますか？')">
@@ -99,12 +99,12 @@
                 <td>2015/9/11</td>
                 <td>高</td>
                 <td align="center">
-                  <form action="index.html" name="finishform_b" method="POST">
+                  <form action="index.php" name="finishform_b" method="POST">
                     <input type="checkbox" name="finish_b" value="1" onClick="chkClick_b()">
                   </form>
                 </td>
                 <td align="center">
-                  <form action="index.html" method="POST">
+                  <form action="index.php" method="POST">
                     <input type="checkbox" name="delete" id="no-check-delete">
                     <input type="hidden" name="delete-key" value="">
                     <input type="submit" id="no-delete-submit" class="btn btn-xs btn-danger" value="削除" onClick="return confirm('本当に削除しますか？')">

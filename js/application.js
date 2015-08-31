@@ -63,14 +63,14 @@ $(function(){
 // 完了にチェック解除をすることでの操作
 function chkClick() {
 　if (!finishform.finish.checked) {
-　　location.href="index.html#finishcheck";
+　　location.href="index.php#finishcheck";
 　}
 }
 
 // 完了にチェックをすることでの操作
 function chkClick_b() {
 　if (finishform_b.finish_b.checked) {
-　　location.href="index.html#finishcheck";
+　　location.href="index.php#finishcheck";
 　}
 }
 
