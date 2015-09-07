@@ -1,3 +1,9 @@
+<?php
+
+require_once('config.php');
+
+?>
+
 <!DOCTYPE html>
 <html lang="ja">
   <head>
@@ -51,70 +57,107 @@
 
         <div class="col-sm-12" style="margin-top: 30px;">
           <legend>完了タスク</legend>
-          <table class="table table-striped table-bordered table-hover">
-            <tr>
-              <th>タイトル</th>
-              <th>予定日</th>
-              <th>完了日</th>
-              <th>優先順位</th>
-              <th>完了</th>
-              <th>削除</th>
-            </tr>
-            <tr class="finish">
-              <td data-href="#finish">テスト完了タスク</td>
-              <td data-href="#finish">2015/8/1</td>
-              <td data-href="#finish">2015/8/29</td>
-              <td data-href="#finish">高</td>
-              <td align="center">
-                <form action="index.php" name="finishform" method="POST">
-                  <input type="checkbox" name="finish" value="1" onClick="chkClick()" checked>
-                </form>
-              </td>
-              <td align="center">
-                <form action="index.php" method="POST">
-                  <input type="checkbox" name="delete" id="check-delete">
-                  <input type="hidden" name="delete-key" value="">
-                  <input type="submit" id="delete-submit" class="btn btn-xs btn-danger" value="削除" onClick="return confirm('本当に削除しますか？')">
-                </form>
-              </td>
-            </tr>
-          </table>
-          <!-- 完了タスクがない場合 -->
-          <!--
-          <h1 style="padding-top: 20px;">完了タスクがありません</h1>
-          -->
+
+            <?php
+
+            $finish_task = 'SELECT * FROM task WHERE FINISH_CHECK = 1';
+            $finish_stmt = $dbh->query($finish_task);
+            $count = $finish_stmt -> rowCount();
+
+            if ($count != 0)
+            {
+              while ($finish_result = $finish_stmt->fetch(PDO::FETCH_ASSOC))
+              {
+                echo "<table class='table table-striped table-bordered table-hover'>";
+                  echo "<tr>";
+                    echo "<th>タイトル</th>";
+                    echo "<th>予定日</th>";
+                    echo "<th>完了日</th>";
+                    echo "<th>優先順位</th>";
+                    echo "<th>完了</th>";
+                    echo "<th>削除</th>";
+                  echo "</tr>";
+                  echo "<tr class='finish'>";
+                    echo "<td data-href='#finish'>".$finish_result['TITLE']."</td>";
+                    echo "<td data-href='#finish'>".$finish_result['SCHEDULE_DATE']."</td>";
+                    echo "<td data-href='#finish'>".$finish_result['FINISH_DATE']."</td>";
+                    echo "<td data-href='#finish'>".$finish_result['RANK']."</td>";
+                    echo "<td align='center'>";
+                      echo "<form action='index.php' name='finishform' method='POST'>";
+                        echo "<input type='checkbox' name='finish' value='1' onClick='chkClick()' checked>";
+                      echo "</form>";
+                    echo "</td>";
+                    echo "<td align='center'>";
+                      echo "<form action='dbphp/delete.php' method='POST'>";
+                        echo "<input type='checkbox' id='check-delete'>&nbsp;";
+                        echo "<input type='hidden' name='delete-key' value='".$finish_result['ID']."'>";
+                        echo "<input type='submit' id='delete-submit' class='btn btn-xs btn-danger' value='削除' onClick='return confirm(\"本当に削除しますか？\")'>";
+                      echo "</form>";
+                    echo "</td>";
+                  echo "</tr>";
+                echo "</table>";
+              }
+            }
+            else
+            {
+              echo "<div class='well' align='center'>";
+                echo "<h1>完了タスクがありません</h1>";
+              echo "</div>";
+            }
+
+            ?>
 
           <legend>未完了タスク</legend>
-          <div class="col-sm-10">
-            <table class="table table-striped table-bordered table-hover">
-              <tr>
-                <th>タイトル</th>
-                <th>予定日</th>
-                <th>優先順位</th>
-                <th>完了</th>
-                <th>削除</th>
-              </tr>
-              <tr class="no-finish" data-href="#no-finish">
-                <td>テスト未完了タスク</td>
-                <td>2015/9/11</td>
-                <td>高</td>
-                <td align="center">
-                  <form action="index.php" name="finishform_b" method="POST">
-                    <input type="checkbox" name="finish_b" value="1" onClick="chkClick_b()">
-                  </form>
-                </td>
-                <td align="center">
-                  <form action="index.php" method="POST">
-                    <input type="checkbox" name="delete" id="no-check-delete">
-                    <input type="hidden" name="delete-key" value="">
-                    <input type="submit" id="no-delete-submit" class="btn btn-xs btn-danger" value="削除" onClick="return confirm('本当に削除しますか？')">
-                  </form>
-                </td>
-              </tr>
-            </table>
+          <div class="col-sm-12">
+
+            <?php
+
+            $no_finish_task = 'SELECT * FROM task WHERE FINISH_CHECK = 0';
+            $no_finish_stmt = $dbh->query($no_finish_task);
+            $nfs_count = $no_finish_stmt -> rowCount();
+
+            if ($nfs_count != 0)
+            {
+              while ($no_finish_result = $no_finish_stmt->fetch(PDO::FETCH_ASSOC))
+              {
+                echo "<table class='table table-striped table-bordered table-hover'>";
+                  echo "<tr>";
+                    echo "<th>タイトル</th>";
+                    echo "<th>予定日</th>";
+                    echo "<th>優先順位</th>";
+                    echo "<th>完了</th>";
+                    echo "<th>削除</th>";
+                  echo "</tr>";
+                  echo "<tr class='no-finish'>";
+                    echo "<td data-href='#finish'>".$no_finish_result['TITLE']."</td>";
+                    echo "<td data-href='#finish'>".$no_finish_result['SCHEDULE_DATE']."</td>";
+                    echo "<td data-href='#finish'>".$no_finish_result['RANK']."</td>";
+                    echo "<td align='center'>";
+                      echo "<form action='index.php' name='finishform_b' method='POST'>";
+                        echo "<input type='checkbox' name='finish_b' value='0' onClick='chkClick()'>";
+                      echo "</form>";
+                    echo "</td>";
+                    echo "<td align='center'>";
+                      echo "<form action='dbphp/delete.php' method='POST'>";
+                        echo "<input type='checkbox' name='delete' id='no-check-delete' value='0'>&nbsp;";
+                        echo "<input type='hidden' name='delete-key' value='".$no_finish_result['ID']."'>";
+                        echo "<input type='submit' id='no-delete-submit' class='btn btn-xs btn-danger' value='削除' onClick='return confirm(\"本当に削除しますか？\")'>";
+                      echo "</form>";
+                    echo "</td>";
+                  echo "</tr>";
+                echo "</table>";
+              }
+            }
+            else
+            {
+              echo "<div class='well' align='center'>";
+                echo "<h1>未完了タスクがありません</h1>";
+              echo "</div>";
+            }
+
+            ?>
+
           </div>
-          <!-- 未完了タスクがない場合 -->
-          <!-- <h1 style="padding-top: 20px;">未完了タスクがありません</h1> -->
 
         </div>
       </div>
@@ -122,3 +165,9 @@
 
   </body>
 </html>
+
+<?php
+
+$dbh = null;
+
+?>
