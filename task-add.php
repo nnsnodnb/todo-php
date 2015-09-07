@@ -1,3 +1,9 @@
+<?php
+
+require_once('config.php');
+
+?>
+
 <!DOCTYPE html>
 <html lang="ja">
   <head>
@@ -46,34 +52,34 @@
       <div class="row">
         <div class="col-sm-12">
           <div class="well bs-component">
-            <form class="form-horizontal">
+            <form action="dbphp/insert.php" class="form-horizontal" method="POST">
               <fieldset>
                 <legend>タスク追加</legend>
                 <div class="form-group">
                   <label for="title" class="col-sm-2 control-label">タスクタイトル</label>
                   <div class="col-sm-10">
-                    <input type="text" class="form-control" id="title" placeholder="タスクタイトル">
+                    <input type="text" class="form-control" name="title" id="title" placeholder="タスクタイトル">
                   </div>
                 </div>
                 <div class="form-group">
                   <label for="scheduled" class="col-sm-2 control-label">予定日</label>
                   <div class="col-sm-10">
-                    <input type="text" id="datepicker" class="form-control" id="scheduled" placeholder="yyyy/mm/dd">
+                    <input type="text" id="datepicker" class="form-control" name="scheduled" id="scheduled" placeholder="yyyy/mm/dd">
                   </div>
                 </div>
                 <div class="form-group">
                   <label for="rank" class="col-sm-2 control-label">優先順位</label>
                   <div class="col-sm-10">
-                    <select class="form-control" id="rank">
-                      <option value="1">高</option>
-                      <option value="2">中</option>
-                      <option value="3">低</option>
+                    <select class="form-control" name="rank" id="rank">
+                      <option value="高">高</option>
+                      <option value="中">中</option>
+                      <option value="低">低</option>
                     </select>
                   </div>
                 </div>
                 <div class="form-group form-submit">
                   <div class="col-sm-10 col-sm-offset-2">
-                    <a href="index.php">
+                    <a href="javascript:history.back();">
                       <button type="button" class="btn btn-info" name="button">戻る</button>
                     </a>
                     <input type="reset" class="btn btn-default" value="キャンセル">
