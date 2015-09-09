@@ -106,9 +106,10 @@ require_once('config.php');
             }
 
             ?>
+        </div>
 
+        <div class="col-sm-12">
           <legend>未完了タスク</legend>
-          <div class="col-sm-12">
 
             <?php
 
@@ -157,9 +158,8 @@ require_once('config.php');
 
             ?>
 
-          </div>
-
         </div>
+
       </div>
     </div>
 
