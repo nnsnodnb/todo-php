@@ -1,11 +1,11 @@
 // 指定行クリックによるリンク
 jQuery(function($) {
-  $('tbody td[data-href]').addClass('clickable').delegate('*', 'click', function() {
-    if (this.tagName !== 'A') {
-    	window.location = $(this).parents('td').data('href');
-    }
-  return false;
-	});
+  $('tr[data-href]').addClass('clickable')
+    .click(function(e) {
+      if($(e.target).is('td,th')){
+        window.location = $(e.target).closest('tr').data('href');
+      };
+  });
 });
 
 // チェックボックスによる削除ボタンの有効化
@@ -60,17 +60,17 @@ $(function(){
 	});
 });
 
-// 完了にチェック解除をすることでの操作
+// 完了のチェック解除をすることでの操作
 function chkClick() {
 　if (!finishform.finish.checked) {
-　　location.href="index.php#finishcheck";
+　　location.href="test.html";
 　}
 }
 
 // 完了にチェックをすることでの操作
 function chkClick_b() {
 　if (finishform_b.finish_b.checked) {
-　　location.href="index.php#finishcheck";
+　　location.href="test.html";
 　}
 }
 
