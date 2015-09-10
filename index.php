@@ -62,7 +62,7 @@ session_start();
 
             <?php
 
-            $finish_task = 'SELECT * FROM task WHERE FINISH_CHECK = 1 ORDER BY SCHEDULE_DATE';
+            $finish_task = 'SELECT * FROM task WHERE FINISH_CHECK = 1 ORDER BY FINISH_DATE DESC';
             $finish_stmt = $dbh->query($finish_task);
             $count = $finish_stmt -> rowCount();
 
@@ -80,8 +80,13 @@ session_start();
                 for ($i = 0 ; $i < $count ; $i++)
                 {
                   $finish_result = $finish_stmt->fetch(PDO::FETCH_ASSOC);
+                  $_SESSION['id'] = $finish_result['ID'];
+                  $_SESSION['title'] = $finish_result['TITLE'];
+                  $_SESSION['schedule'] = $finish_result['SCHEDULE_DATE'];
+                  $_SESSION['finish'] = $finish_result['FINISH_DATE'];
+                  $_SESSION['rank'] = $finish_result['RANK'];
 
-                  echo "<tr class='finish' data-href='test.html'>";
+                  echo "<tr class='finish' data-href='view.php'>";
                     echo "<td>".$finish_result['TITLE']."</td>";
                     echo "<td>".$finish_result['SCHEDULE_DATE']."</td>";
                     echo "<td>".$finish_result['FINISH_DATE']."</td>";
@@ -133,7 +138,12 @@ session_start();
                 {
                   $no_finish_result = $no_finish_stmt->fetch(PDO::FETCH_ASSOC);
 
-                  echo "<tr class='no-finish' data-href='test.html'>";
+                  $_SESSION['notitle'] = $no_finish_result['TITLE'];
+                  $_SESSION['noschedule'] = $no_finish_result['SCHEDULE_DATE'];
+                  $_SESSION['norank'] = $no_finish_result['RANK'];
+                  $_SESSION['noid'] = $no_finish_result['ID'];
+
+                  echo "<tr class='no-finish' data-href='edit.php'>";
                     echo "<td>".$no_finish_result['TITLE']."</td>";
                     echo "<td>".$no_finish_result['SCHEDULE_DATE']."</td>";
                     echo "<td>".$no_finish_result['RANK']."</td>";
