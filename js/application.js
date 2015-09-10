@@ -1,51 +1,51 @@
-// 指定行クリックによるリンク
-jQuery(function($) {
+// グローバル変数
+var gl_chk = [];
+var gl_sub = [];
+var Nogl_chk = [];
+var Nogl_sub = [];
+
+$(function() {
+
+  // 削除チェックボックスの監視
+  // 完了タスク
+  var chk = [];
+  var sub = [];
+  var classCount = $('.chk').length
+  for (var i = 0 ; i < classCount ; i++)
+  {
+    chk.push("#chk_" + i);
+    sub.push("#sub_" + i);
+    $(sub[i]).attr('disabled', 'disabled');
+  }
+
+  gl_chk = chk;
+  gl_sub = sub;
+
+  // 未完了タスク
+  var Nochk = [];
+  var Nosub = [];
+  var NoclassCount = $('.nochk').length
+  for (var i = 0 ; i < NoclassCount ; i++)
+  {
+    Nochk.push("#nochk_" + i);
+    Nosub.push("#nosub_" + i);
+    $(Nosub[i]).attr('disabled', 'disabled');
+  }
+
+  Nogl_chk = Nochk;
+  Nogl_sub = Nosub;
+
+  // 指定行クリックによるリンク
   $('tr[data-href]').addClass('clickable')
     .click(function(e) {
-      if($(e.target).is('td,th')){
+      if($(e.target).is('td,th')){    // 違うタグが入ることでリンクを飛ばさないように設定
         window.location = $(e.target).closest('tr').data('href');
       };
   });
-});
 
-// チェックボックスによる削除ボタンの有効化
-$(function() {
-  $('#finish-submit').attr('disabled', 'disabled');
-	$('#delete-submit').attr('disabled', 'disabled');
-  $('#no-finish-submit').attr('disabled', 'disabled');
-	$('#no-delete-submit').attr('disabled', 'disabled');
+  // ブラウザに関係なくカレンダー表示
+  $("#datepicker").datepicker();
 
-  // 完了タスク
-	$('#check-finish').click(function() {
-		if ($(this).prop('checked') == false) {
-			$('#finish-submit').attr('disabled', 'disabled');
-		} else {
-			$('#finish-submit').removeAttr('disabled');
-		}
-	});
-	$('#check-delete').click(function() {
-		if ($(this).prop('checked') == false) {
-			$('#delete-submit').attr('disabled', 'disabled');
-		} else {
-			$('#delete-submit').removeAttr('disabled');
-		}
-	});
-
-  // 未完了タスク
-  $('#no-check-finish').click(function() {
-		if ($(this).prop('checked') == false) {
-			$('#no-finish-submit').attr('disabled', 'disabled');
-		} else {
-			$('#no-finish-submit').removeAttr('disabled');
-		}
-	});
-	$('#no-check-delete').click(function() {
-		if ($(this).prop('checked') == false) {
-			$('#no-delete-submit').attr('disabled', 'disabled');
-		} else {
-			$('#no-delete-submit').removeAttr('disabled');
-		}
-	});
 });
 
 // ページ内リンクスムーズ移動
@@ -60,13 +60,6 @@ $(function(){
 	});
 });
 
-// 完了のチェック解除をすることでの操作
-function chkClick() {
-　if (!finishform.finish.checked) {
-　　location.href="test.html";
-　}
-}
-
 // 完了にチェックをすることでの操作
 function chkClick_b() {
 　if (finishform_b.finish_b.checked) {
@@ -74,7 +67,39 @@ function chkClick_b() {
 　}
 }
 
-// jQueryでどのブラウザにもカレンダー表示を対応
-$(function() {
-  $("#datepicker").datepicker();
-});
+// 削除チェックボックスをクリックした時に呼び出される
+function whichChk() {
+
+  if ($('[class="chk"]:checked').prop('checked') == true) {
+    chkbox = $('[class="chk"]:checked').attr('id');
+    var strchk = chkbox.split('_');   // アンダーバーで分割
+    var tr_chk = strchk[1];           // 変数に代入（なくてもいいけどわかりやすい）
+
+    $(gl_chk[tr_chk]).change(function() {
+      if ($(this).is(':checked')) {
+        $(gl_sub[tr_chk]).removeAttr('disabled').focus();
+      } else {
+        $(gl_sub[tr_chk]).attr('disabled' , 'disabled');
+      }
+    });
+  }
+
+}
+
+function NowhichChk() {
+
+  if ($('[class="nochk"]:checked').prop('checked') == true) {
+    Nochkbox = $('[class="nochk"]:checked').attr('id');
+    var Nostrchk = Nochkbox.split('_');
+    var Notr_chk = Nostrchk[1];
+
+    $(Nogl_chk[Notr_chk]).change(function() {
+      if ($(this).is(':checked')) {
+        $(Nogl_sub[Notr_chk]).removeAttr('disabled').focus();
+      } else {
+        $(Nogl_sub[Notr_chk]).attr('disabled' , 'disabled');
+      }
+    });
+  }
+
+}

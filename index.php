@@ -2,6 +2,8 @@
 
 require_once('config.php');
 
+session_start();
+
 ?>
 
 <!DOCTYPE html>
@@ -24,7 +26,7 @@ require_once('config.php');
   </head>
 
   <body class="no-thank-yu">
-    <header>
+    <header id="wrap">
       <div class="navbar navbar-default navbar-fixed-top">
         <div class="container">
           <div class="navbar-header">
@@ -60,43 +62,43 @@ require_once('config.php');
 
             <?php
 
-            $finish_task = 'SELECT * FROM task WHERE FINISH_CHECK = 1';
+            $finish_task = 'SELECT * FROM task WHERE FINISH_CHECK = 1 ORDER BY SCHEDULE_DATE';
             $finish_stmt = $dbh->query($finish_task);
             $count = $finish_stmt -> rowCount();
 
             if ($count != 0)
             {
-              while ($finish_result = $finish_stmt->fetch(PDO::FETCH_ASSOC))
-              {
-                echo "<table class='table table-striped table-bordered table-hover'>";
-                  echo "<tr>";
-                    echo "<th>タイトル</th>";
-                    echo "<th>予定日</th>";
-                    echo "<th>完了日</th>";
-                    echo "<th>優先順位</th>";
-                    echo "<th>完了</th>";
-                    echo "<th>削除</th>";
-                  echo "</tr>";
+              echo "<table class='table table-striped table-bordered table-hover'>";
+                echo "<tr align='center'>";
+                  echo "<th>タイトル</th>";
+                  echo "<th>予定日</th>";
+                  echo "<th>完了日</th>";
+                  echo "<th>優先順位</th>";
+                  echo "<th>削除</th>";
+                echo "</tr>";
+
+                for ($i = 0 ; $i < $count ; $i++)
+                {
+                  $finish_result = $finish_stmt->fetch(PDO::FETCH_ASSOC);
+
                   echo "<tr class='finish' data-href='test.html'>";
                     echo "<td>".$finish_result['TITLE']."</td>";
                     echo "<td>".$finish_result['SCHEDULE_DATE']."</td>";
                     echo "<td>".$finish_result['FINISH_DATE']."</td>";
                     echo "<td>".$finish_result['RANK']."</td>";
-                    echo "<td align='center'>";
-                      echo "<form action='index.php' name='finishform' method='POST'>";
-                        echo "<input type='checkbox' name='finish' value='1' onClick='chkClick()' checked>";
-                      echo "</form>";
-                    echo "</td>";
+
                     echo "<td align='center'>";
                       echo "<form action='dbphp/delete.php' method='POST'>";
-                        echo "<input type='checkbox' id='check-delete'>&nbsp;";
+                        echo "<input type='checkbox' class='chk' value='0' id='chk_".$i."' onClick='whichChk()'>&nbsp;";
                         echo "<input type='hidden' name='delete-key' value='".$finish_result['ID']."'>";
-                        echo "<input type='submit' id='delete-submit' class='btn btn-xs btn-danger' value='削除' onClick='return confirm(\"本当に削除しますか？\")'>";
+                        echo "<input type='submit' class='btn btn-danger btn-xs' value='削除' id='sub_".$i."' onClick='return confirm(\"本当に削除しますか？\");'>";
                       echo "</form>";
                     echo "</td>";
+
                   echo "</tr>";
-                echo "</table>";
-              }
+
+                }
+              echo "</table>";
             }
             else
             {
@@ -113,41 +115,43 @@ require_once('config.php');
 
             <?php
 
-            $no_finish_task = 'SELECT * FROM task WHERE FINISH_CHECK = 0';
+            $no_finish_task = 'SELECT * FROM task WHERE FINISH_CHECK = 0 ORDER BY schedule_date';
             $no_finish_stmt = $dbh->query($no_finish_task);
             $nfs_count = $no_finish_stmt -> rowCount();
 
             if ($nfs_count != 0)
             {
-              while ($no_finish_result = $no_finish_stmt->fetch(PDO::FETCH_ASSOC))
-              {
-                echo "<table class='table table-striped table-bordered table-hover'>";
-                  echo "<tr>";
-                    echo "<th>タイトル</th>";
-                    echo "<th>予定日</th>";
-                    echo "<th>優先順位</th>";
-                    echo "<th>完了</th>";
-                    echo "<th>削除</th>";
-                  echo "</tr>";
+              echo "<table class='table table-striped table-bordered table-hover'>";
+                echo "<tr>";
+                  echo "<th>タイトル</th>";
+                  echo "<th>予定日</th>";
+                  echo "<th>優先順位</th>";
+                  echo "<th>完了</th>";
+                  echo "<th>削除</th>";
+                echo "</tr>";
+                for ($j = 0 ; $j < $nfs_count ; $j++)
+                {
+                  $no_finish_result = $no_finish_stmt->fetch(PDO::FETCH_ASSOC);
+
                   echo "<tr class='no-finish' data-href='test.html'>";
                     echo "<td>".$no_finish_result['TITLE']."</td>";
                     echo "<td>".$no_finish_result['SCHEDULE_DATE']."</td>";
                     echo "<td>".$no_finish_result['RANK']."</td>";
                     echo "<td align='center'>";
                       echo "<form action='index.php' name='finishform_b' method='POST'>";
-                        echo "<input type='checkbox' name='finish_b' value='0' onClick='chkClick()'>";
+                        echo "<input type='checkbox' name='finish_b' value='0' onClick='chkClick_b()'>";
                       echo "</form>";
                     echo "</td>";
                     echo "<td align='center'>";
-                      echo "<form action='dbphp/delete.php' name='finishform_b' method='POST'>";
-                        echo "<input type='checkbox' name='delete' name='finish_b' id='no-check-delete' value='0'>&nbsp;";
+                      echo "<form action='dbphp/delete.php' method='POST'>";
+                        echo "<input type='checkbox' class='nochk' value='0' id='nochk_".$j."' onClick='NowhichChk()'>&nbsp;";
                         echo "<input type='hidden' name='delete-key' value='".$no_finish_result['ID']."'>";
-                        echo "<input type='submit' id='no-delete-submit' class='btn btn-xs btn-danger' value='削除' onClick='return confirm(\"本当に削除しますか？\")'>";
+                        echo "<input type='submit' class='btn btn-danger btn-xs' value='削除' id='nosub_".$j."' onClick='return confirm(\"本当に削除しますか？\");'>";
                       echo "</form>";
                     echo "</td>";
                   echo "</tr>";
-                echo "</table>";
               }
+              echo "</table>";
             }
             else
             {
