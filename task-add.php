@@ -10,9 +10,10 @@ require_once('config.php');
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>新規タスク追加</title>
+    <title>新規タスク追加｜ToDo管理</title>
     <link href="css/bootstrap.css" rel="stylesheet">
     <link href="css/application.css" rel="stylesheet">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css" rel="stylesheet">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <script src="js/application.js"></script>
@@ -80,7 +81,7 @@ require_once('config.php');
                 <div class="form-group form-submit">
                   <div class="col-sm-10 col-sm-offset-2">
                     <a href="javascript:history.back();">
-                      <button type="button" class="btn btn-info" name="button">戻る</button>
+                      <button type="button" class="btn btn-info">戻る</button>
                     </a>
                     <input type="reset" class="btn btn-default" value="キャンセル">
                     <input type="submit" class="btn btn-primary" value="登録">
