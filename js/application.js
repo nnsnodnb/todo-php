@@ -25,11 +25,11 @@ $(function() {
   var Nochk = [];
   var Nosub = [];
   var NoclassCount = $('.nochk').length
-  for (var i = 0 ; i < NoclassCount ; i++)
+  for (var j = 0 ; j < NoclassCount ; j++)
   {
-    Nochk.push("#nochk_" + i);
-    Nosub.push("#nosub_" + i);
-    $(Nosub[i]).attr('disabled', 'disabled');
+    Nochk.push("#nochk_" + j);
+    Nosub.push("#nosub_" + j);
+    $(Nosub[j]).attr('disabled', 'disabled');
   }
 
   Nogl_chk = Nochk;
@@ -43,27 +43,25 @@ $(function() {
       };
   });
 
-  // ブラウザに関係なくカレンダー表示
-  $("#datepicker").datepicker();
-
-});
-
-// ページ内リンクスムーズ移動
-$(function(){
+  // ページ内リンクスムーズ移動
 	$('a[href^=#]').click(function(){
-		var speed = 900;
+		var speed = 700;
 		var href= $(this).attr("href");
 		var target = $(href == "#" || href == "" ? 'html' : href);
 		var position = target.offset().top;
 		$("html, body").animate({scrollTop:position}, speed, "swing");
 		return false;
 	});
+
+  // ブラウザに関係なくカレンダー表示
+  $("#datepicker").datepicker();
+
 });
 
 // 完了にチェックをすることでの操作
 function chkClick_b() {
-　if (finishform_b.finish_b.checked) {
-　　location.href="test.html";
+  if ($('[class="fini"]:checked').prop('checked') == true) {
+    location.href="dbphp/complete.php";
 　}
 }
 
