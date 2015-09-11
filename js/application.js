@@ -7,7 +7,7 @@ var Nogl_sub = [];
 $(function() {
 
   $(window).bind("load", function(){
-    if(document.URL.match("index")) {
+    if(!document.URL.match("task-add") || !document.URL.match("edit") || !document.URL.match("view") || !document.URL.match("dbphp")) {
       // 削除チェックボックスの監視
       // 完了タスク
       var chk = [];
@@ -60,7 +60,7 @@ $(function() {
 
   // ブラウザに関係なくカレンダー表示
   $(window).bind("load", function(){
-    if(document.URL.match("task-add")) {
+    if(document.URL.match("task-add") || document.URL.match("view") || document.URL.match("edit")) {
       $("#datepicker").datepicker();
     }
   });
