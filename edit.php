@@ -43,7 +43,7 @@ session_start();
           </div>
           <div class="navbar-collapse collapse" id="navbar-main">
             <ul class="nav navbar-nav">
-              <li class="active"><a href="index.php">タスク一覧</a></li>
+              <li><a href="index.php">タスク一覧</a></li>
               <li><a href="task-add.php">タスク登録</a></li>
             </ul>
           </div>
@@ -81,9 +81,24 @@ session_start();
                 <label for="rank" class="col-sm-2 control-label">優先順位</label>
                 <div class="col-sm-10">
                   <select class="form-control" name="rank" id="rank">
-                    <option value="高">高</option>
-                    <option value="中">中</option>
-                    <option value="低">低</option>
+                    <?php
+                      $sql = 'SELECT RANK FROM task WHERE ID = '.$_SESSION['noid'];
+                      $stmt = $dbh->query($sql);
+                      $result = $stmt->fetch(PDO::FETCH_ASSOC);
+                      if ($result['RANK'] == '高') {
+                        echo "<option value='高' selected>高</option>";
+                        echo "<option value='中'>中</option>";
+                        echo "<option value='低'>低</option>";
+                      } elseif ($result['RANK'] == '中') {
+                        echo "<option value='高'>高</option>";
+                        echo "<option value='中' selected>中</option>";
+                        echo "<option value='低'>低</option>";
+                      } elseif ($result['RANK'] == '低') {
+                        echo "<option value='高'>高</option>";
+                        echo "<option value='中'>中</option>";
+                        echo "<option value='低' selected>低</option>";
+                      }
+                    ?>
                   </select>
                 </div>
               </div>
@@ -93,7 +108,7 @@ session_start();
                     <button type="button" class="btn btn-info">戻る</button>
                   </a>
                   <input type="reset" class="btn btn-default" value="キャンセル">
-                  <input type="submit" class="btn btn-primary" value="登録">
+                  <input type="submit" class="btn btn-primary" value="変更" onClick="return confirm('この内容で変更してもよろしいですか？')">
                 </div>
               </div>
             </form>
