@@ -6,62 +6,73 @@ var Nogl_sub = [];
 
 $(function() {
 
-  // 削除チェックボックスの監視
-  // 完了タスク
-  var chk = [];
-  var sub = [];
-  var classCount = $('.chk').length
-  for (var i = 0 ; i < classCount ; i++)
-  {
-    chk.push("#chk_" + i);
-    sub.push("#sub_" + i);
-    $(sub[i]).attr('disabled', 'disabled');
-  }
+  $(window).bind("load", function(){
+    if(document.URL.match("index")) {
+      // 削除チェックボックスの監視
+      // 完了タスク
+      var chk = [];
+      var sub = [];
+      var classCount = $('.chk').length
+      for (var i = 0 ; i < classCount ; i++)
+      {
+        chk.push("#chk_" + i);
+        sub.push("#sub_" + i);
+        $(sub[i]).attr('disabled', 'disabled');
+      }
 
-  gl_chk = chk;
-  gl_sub = sub;
+      gl_chk = chk;
+      gl_sub = sub;
 
-  // 未完了タスク
-  var Nochk = [];
-  var Nosub = [];
-  var NoclassCount = $('.nochk').length
-  for (var j = 0 ; j < NoclassCount ; j++)
-  {
-    Nochk.push("#nochk_" + j);
-    Nosub.push("#nosub_" + j);
-    $(Nosub[j]).attr('disabled', 'disabled');
-  }
+      // 未完了タスク
+      var Nochk = [];
+      var Nosub = [];
+      var NoclassCount = $('.nochk').length
+      for (var j = 0 ; j < NoclassCount ; j++)
+      {
+        Nochk.push("#nochk_" + j);
+        Nosub.push("#nosub_" + j);
+        $(Nosub[j]).attr('disabled', 'disabled');
+      }
 
-  Nogl_chk = Nochk;
-  Nogl_sub = Nosub;
+      Nogl_chk = Nochk;
+      Nogl_sub = Nosub;
 
-  // 指定行クリックによるリンク
-  $('tr[data-href]').addClass('clickable')
-    .click(function(e) {
-      if($(e.target).is('td,th')){    // 違うタグが入ることでリンクを飛ばさないように設定
-        window.location = $(e.target).closest('tr').data('href');
-      };
+      // 指定行クリックによるリンク
+      $('tr[data-href]').addClass('clickable')
+        .click(function(e) {
+          if($(e.target).is('td,th')){    // 違うタグが入ることでリンクを飛ばさないように設定
+            window.location = $(e.target).closest('tr').data('href');
+          };
+      });
+
+      // ページ内リンクスムーズ移動
+    	$('a[href^=#]').click(function(){
+    		var speed = 700;
+    		var href= $(this).attr("href");
+    		var target = $(href == "#" || href == "" ? 'html' : href);
+    		var position = target.offset().top;
+    		$("html, body").animate({scrollTop:position}, speed, "swing");
+    		return false;
+    	});
+
+    }
   });
 
-  // ページ内リンクスムーズ移動
-	$('a[href^=#]').click(function(){
-		var speed = 700;
-		var href= $(this).attr("href");
-		var target = $(href == "#" || href == "" ? 'html' : href);
-		var position = target.offset().top;
-		$("html, body").animate({scrollTop:position}, speed, "swing");
-		return false;
-	});
-
   // ブラウザに関係なくカレンダー表示
-  $("#datepicker").datepicker();
+  $(window).bind("load", function(){
+    if(document.URL.match("task-add")) {
+      $("#datepicker").datepicker();
+    }
+  });
 
 });
 
 // 完了にチェックをすることでの操作
 function chkClick_b() {
   if ($('[class="fini"]:checked').prop('checked') == true) {
-    location.href="dbphp/complete.php";
+    //location.href="dbphp/complete.php";
+    link = $('[name="finishform_b"]').attr('action');
+    location.href=link;
 　}
 }
 
