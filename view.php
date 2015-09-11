@@ -2,7 +2,16 @@
 
 require_once('config.php');
 
-session_start();
+$id = $_GET['id'];
+
+$sql = 'SELECT * FROM task WHERE ID = '.$id;
+$stmt = $dbh->query($sql);
+$result = $stmt->fetch(PDO::FETCH_ASSOC);
+
+$title = $result['TITLE'];
+$schedule = $result['SCHEDULE_DATE'];
+$finish = $result['FINISH_DATE'];
+$rank = $result['RANK'];
 
 ?>
 
@@ -68,13 +77,13 @@ session_start();
               <div class="form-group">
                 <label for="title" class="col-sm-2 control-label">タイトル</label>
                 <div class="col-sm-10">
-                  <input type="text" class="form-control" name="title" id="title" value="<?php echo $_SESSION['title']; ?>">
+                  <input type="text" class="form-control" name="title" id="title" value="<?php echo $title; ?>">
                 </div>
               </div>
               <div class="form-group">
                 <label for="scheduled" class="col-sm-2 control-label">予定日</label>
                 <div class="col-sm-10">
-                  <input type="text" id="datepicker" class="form-control" name="scheduled" id="scheduled" value="<?php echo $_SESSION['schedule']; ?>">
+                  <input type="text" id="datepicker" class="form-control" name="scheduled" id="scheduled" value="<?php echo $schedule; ?>">
                 </div>
               </div>
               <div class="form-group">
@@ -82,18 +91,15 @@ session_start();
                 <div class="col-sm-10">
                   <select class="form-control" name="rank" id="rank">
                     <?php
-                      $sql = 'SELECT RANK FROM task WHERE ID = '.$_SESSION['id'];
-                      $stmt = $dbh->query($sql);
-                      $result = $stmt->fetch(PDO::FETCH_ASSOC);
-                      if ($result['RANK'] == '高') {
+                      if ($rank == '高') {
                         echo "<option value='高' selected>高</option>";
                         echo "<option value='中'>中</option>";
                         echo "<option value='低'>低</option>";
-                      } elseif ($result['RANK'] == '中') {
+                      } elseif ($rank == '中') {
                         echo "<option value='高'>高</option>";
                         echo "<option value='中' selected>中</option>";
                         echo "<option value='低'>低</option>";
-                      } elseif ($result['RANK'] == '低') {
+                      } elseif ($rank == '低') {
                         echo "<option value='高'>高</option>";
                         echo "<option value='中'>中</option>";
                         echo "<option value='低' selected>低</option>";
@@ -102,6 +108,7 @@ session_start();
                   </select>
                 </div>
               </div>
+              <input type="hidden" name="id" value="<?php echo $id; ?>">
               <div class="form-group form-submit">
                 <div class="col-sm-10 col-sm-offset-2">
                   <a href="javascript:history.back();">
@@ -120,13 +127,13 @@ session_start();
             <legend>タスク閲覧</legend>
             <?php
               echo "<h3>タイトル</h3>";
-              echo "<p>".$_SESSION['title']."</p>";
+              echo "<p>".$title."</p>";
               echo "<h3>予定日</h3>";
-              echo "<p>".$_SESSION['schedule']."</p>";
+              echo "<p>".$schedule."</p>";
               echo "<h3>完了日</h3>";
-              echo "<p>".$_SESSION['finish']."</p>";
+              echo "<p>".$finish."</p>";
               echo "<h3>優先度</h3>";
-              echo "<p>".$_SESSION['rank']."</p>";
+              echo "<p>".$rank."</p>";
             ?>
           </div>
         </div>

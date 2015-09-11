@@ -2,8 +2,6 @@
 
 require_once('config.php');
 
-session_start();
-
 ?>
 
 <!DOCTYPE html>
@@ -25,8 +23,9 @@ session_start();
     <![endif]-->
   </head>
 
-  <body class="no-thank-yu">
-    <header id="wrap">
+  <body class="no-thank-yu" id="wrap">
+
+    <header>
       <div class="navbar navbar-default navbar-fixed-top">
         <div class="container">
           <div class="navbar-header">
@@ -80,13 +79,8 @@ session_start();
                 for ($i = 0 ; $i < $count ; $i++)
                 {
                   $finish_result = $finish_stmt->fetch(PDO::FETCH_ASSOC);
-                  $_SESSION['id'] = $finish_result['ID'];
-                  $_SESSION['title'] = $finish_result['TITLE'];
-                  $_SESSION['schedule'] = $finish_result['SCHEDULE_DATE'];
-                  $_SESSION['finish'] = $finish_result['FINISH_DATE'];
-                  $_SESSION['rank'] = $finish_result['RANK'];
 
-                  echo "<tr class='finish' data-href='view.php'>";
+                  echo "<tr class='finish' data-href='view.php?id=".$finish_result['ID']."'>";
                     echo "<td>".$finish_result['TITLE']."</td>";
                     echo "<td>".$finish_result['SCHEDULE_DATE']."</td>";
                     echo "<td>".$finish_result['FINISH_DATE']."</td>";
@@ -138,18 +132,13 @@ session_start();
                 {
                   $no_finish_result = $no_finish_stmt->fetch(PDO::FETCH_ASSOC);
 
-                  $_SESSION['notitle'] = $no_finish_result['TITLE'];
-                  $_SESSION['noschedule'] = $no_finish_result['SCHEDULE_DATE'];
-                  $_SESSION['norank'] = $no_finish_result['RANK'];
-                  $_SESSION['noid'] = $no_finish_result['ID'];
-
-                  echo "<tr class='no-finish' data-href='edit.php'>";
+                  echo "<tr class='no-finish' data-href='edit.php?id=".$no_finish_result['ID']."'>";
                     echo "<td>".$no_finish_result['TITLE']."</td>";
                     echo "<td>".$no_finish_result['SCHEDULE_DATE']."</td>";
                     echo "<td>".$no_finish_result['RANK']."</td>";
                     echo "<td align='center'>";
                       echo "<form action='index.php' name='finishform_b' method='POST'>";
-                        echo "<input type='checkbox' name='finish_b' value='0' onClick='chkClick_b()'>";
+                        echo "<input type='checkbox' class='fini' name='finish_b' value='0' onClick='chkClick_b()'>";
                       echo "</form>";
                     echo "</td>";
                     echo "<td align='center'>";
@@ -175,6 +164,10 @@ session_start();
         </div>
 
       </div>
+    </div>
+
+    <div align="center" style="background-color: #2C3E50; margin-top:50px;">
+      <a href="#wrap" style="text-decoration: none;"><button type="button" class="btn btn-primary btn-block">トップへ</button></a>
     </div>
 
   </body>
