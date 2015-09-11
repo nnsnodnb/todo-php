@@ -137,7 +137,7 @@ require_once('config.php');
                     echo "<td>".$no_finish_result['SCHEDULE_DATE']."</td>";
                     echo "<td>".$no_finish_result['RANK']."</td>";
                     echo "<td align='center'>";
-                      echo "<form action='index.php' name='finishform_b' method='POST'>";
+                      echo "<form action='dbphp/complete.php?id=".$no_finish_result['ID']."' name='finishform_b' method='POST'>";
                         echo "<input type='checkbox' class='fini' name='finish_b' value='0' onClick='chkClick_b()'>";
                       echo "</form>";
                     echo "</td>";
