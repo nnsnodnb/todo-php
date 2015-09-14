@@ -2,7 +2,7 @@
 
 require_once('../config.php');
 
-$title = $_POST['title'];
+$title = $_POST['title_sub'];
 $scheduled = $_POST['scheduled'];
 $rank = $_POST['rank'];
 $chk = 0;

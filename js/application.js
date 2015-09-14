@@ -118,16 +118,16 @@ function submit_chk() {
   var flag = 0 ;
 
   if (document.add.title_sub.value == "") {
-    flag++ ;
+    flag = 1 ;
   }
   if (document.add.scheduled.value == "") {
-    flag++ ;
+    flag = 1 ;
   }
   if (document.add.rank.value == "") {
-    flag++ ;
+    flag = 1 ;
   }
 
-  if (flag > 0) {
+  if (flag == 1) {
     alert('必須項目に未入力がありました') ;
     return false;
   } else {
