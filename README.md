@@ -13,7 +13,7 @@ PHPでToDo管理ツールを作りました！
 1. MySQLにログインしデータベース及びテーブルを作成
 
   ```bash
-  mysql> source todo_php;
+  mysql> source todo_php.sql;
   ```
 
 1. 設定ファイルの作成
