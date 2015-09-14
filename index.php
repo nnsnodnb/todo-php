@@ -88,7 +88,7 @@ require_once('config.php');
 
                     echo "<td align='center'>";
                       echo "<form action='dbphp/delete.php' method='POST'>";
-                        echo "<input type='checkbox' class='chk' value='0' id='chk_".$i."' onClick='whichChk()'>&nbsp;";
+                        echo "<input type='checkbox' class='chk' data-id='".$i."' id='chk_".$i."'>&nbsp;";
                         echo "<input type='hidden' name='delete-key' value='".$finish_result['ID']."'>";
                         echo "<input type='submit' class='btn btn-danger btn-xs' value='削除' id='sub_".$i."' onClick='return confirm(\"本当に削除しますか？\");'>";
                       echo "</form>";
@@ -128,7 +128,8 @@ require_once('config.php');
                   echo "<th>完了</th>";
                   echo "<th>削除</th>";
                 echo "</tr>";
-                for ($j = 0 ; $j < $nfs_count ; $j++)
+                $j = $i;
+                for ($i = $j ; $i < ($nfs_count + $j) ; $i++)
                 {
                   $no_finish_result = $no_finish_stmt->fetch(PDO::FETCH_ASSOC);
 
@@ -143,9 +144,9 @@ require_once('config.php');
                     echo "</td>";
                     echo "<td align='center'>";
                       echo "<form action='dbphp/delete.php' method='POST'>";
-                        echo "<input type='checkbox' class='nochk' value='0' id='nochk_".$j."' onClick='NowhichChk()'>&nbsp;";
+                        echo "<input type='checkbox' class='chk' value='0' data-id='".$i."' id='chk_".$i."'>&nbsp;";
                         echo "<input type='hidden' name='delete-key' value='".$no_finish_result['ID']."'>";
-                        echo "<input type='submit' class='btn btn-danger btn-xs' value='削除' id='nosub_".$j."' onClick='return confirm(\"本当に削除しますか？\");'>";
+                        echo "<input type='submit' class='btn btn-danger btn-xs' value='削除' id='sub_".$i."' onClick='return confirm(\"本当に削除しますか？\");'>";
                       echo "</form>";
                     echo "</td>";
                   echo "</tr>";
@@ -167,7 +168,9 @@ require_once('config.php');
     </div>
 
     <div align="center" style="background-color: #2C3E50; margin-top:50px;">
-      <a href="#wrap" style="text-decoration: none;"><button type="button" class="btn btn-primary btn-block">トップへ</button></a>
+      <a href="#wrap" style="text-decoration: none;">
+        <button type="button" class="btn btn-primary btn-block">トップへ</button>
+      </a>
     </div>
 
   </body>

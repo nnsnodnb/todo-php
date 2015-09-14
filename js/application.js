@@ -1,41 +1,21 @@
-// グローバル変数
-var gl_chk = [];
-var gl_sub = [];
-var Nogl_chk = [];
-var Nogl_sub = [];
-
 $(function() {
 
   $(window).bind("load", function(){
-    if(!document.URL.match("task-add") || !document.URL.match("edit") || !document.URL.match("view") || !document.URL.match("dbphp")) {
-      // 削除チェックボックスの監視
-      // 完了タスク
-      var chk = [];
-      var sub = [];
-      var classCount = $('.chk').length
-      for (var i = 0 ; i < classCount ; i++)
-      {
-        chk.push("#chk_" + i);
-        sub.push("#sub_" + i);
-        $(sub[i]).attr('disabled', 'disabled');
-      }
+    if(!document.URL.match("task-add") || !document.URL.match("edit") || !document.URL.match("view")) {
 
-      gl_chk = chk;
-      gl_sub = sub;
+      // 初期表示時の処理
+      $('.chk').each(function() {
+        // 現在のチェック状態からボタンのdisabledを切り替える
+        $('#sub_' + $(this).attr('data-id')).prop('disabled', !$(this).prop('checked'));
+      });
 
-      // 未完了タスク
-      var Nochk = [];
-      var Nosub = [];
-      var NoclassCount = $('.nochk').length
-      for (var j = 0 ; j < NoclassCount ; j++)
-      {
-        Nochk.push("#nochk_" + j);
-        Nosub.push("#nosub_" + j);
-        $(Nosub[j]).attr('disabled', 'disabled');
-      }
-
-      Nogl_chk = Nochk;
-      Nogl_sub = Nosub;
+      // チェックされた時の処理
+      $('.chk').change(function() {
+        // チェックボックスの「data-id」属性の値を頼りにボタンを特定
+        var $sub = $('#sub_' + $(this).attr('data-id'));
+        // ボタンのdisabled属性を反転
+        $sub.prop('disabled', !$sub.prop('disabled'));
+      });
 
       // 指定行クリックによるリンク
       $('tr[data-href]').addClass('clickable')
