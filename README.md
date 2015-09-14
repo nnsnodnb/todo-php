@@ -45,9 +45,11 @@ PHPでToDo管理ツールを作りました！
 
 ## Bug
 
-- 削除ボタンの横のチェックボックスの挙動がおかしい
+### Issue [#1](https://github.com/nnsnodnb/todo-php/issues/1)
 
-![](hatena.gif)
+[0a0cad3](https://github.com/nnsnodnb/todo-php/commit/0a0cad383eb0f9b5aed25cb3f7278b61349ef96e)にて修正
+
+- 削除ボタンの横のチェックボックスの挙動がおかしい
 
 JavaScriptでの判定がおかしいようですが，私のスキルではもうどうしようもないです．Forkして修正していただけたら幸いです．
 
