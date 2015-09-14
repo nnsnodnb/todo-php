@@ -14,7 +14,7 @@ require_once('config.php');
     <link href="css/bootstrap.css" rel="stylesheet">
     <link href="css/application.css" rel="stylesheet">
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css" rel="stylesheet">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <script src="js/jquery.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <script src="js/application.js"></script>
     <!--[if lt IE 9]>

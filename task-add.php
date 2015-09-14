@@ -14,7 +14,7 @@ require_once('config.php');
     <link href="css/bootstrap.css" rel="stylesheet">
     <link href="css/application.css" rel="stylesheet">
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css" rel="stylesheet">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <script src="js/jquery.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <script src="js/application.js"></script>
 
@@ -53,25 +53,25 @@ require_once('config.php');
       <div class="row">
         <div class="col-sm-12">
           <div class="well bs-component">
-            <form action="dbphp/insert.php" class="form-horizontal" method="POST">
+            <form action="dbphp/insert.php" name="add" class="form-horizontal" method="POST">
               <fieldset>
                 <legend>タスク追加</legend>
                 <div class="form-group">
                   <label for="title" class="col-sm-2 control-label">タスクタイトル</label>
                   <div class="col-sm-10">
-                    <input type="text" class="form-control" name="title" id="title" placeholder="タスクタイトル">
+                    <input type="text" class="form-control" name="title_sub" id="title" placeholder="タスクタイトル" required>
                   </div>
                 </div>
                 <div class="form-group">
                   <label for="scheduled" class="col-sm-2 control-label">予定日</label>
                   <div class="col-sm-10">
-                    <input type="text" id="datepicker" class="form-control" name="scheduled" id="scheduled" placeholder="yyyy/mm/dd">
+                    <input type="text" id="datepicker" class="form-control" name="scheduled" id="scheduled" placeholder="yyyy/mm/dd" required>
                   </div>
                 </div>
                 <div class="form-group">
                   <label for="rank" class="col-sm-2 control-label">優先順位</label>
                   <div class="col-sm-10">
-                    <select class="form-control" name="rank" id="rank">
+                    <select class="form-control" name="rank" id="rank" required>
                       <option value="高">高</option>
                       <option value="中">中</option>
                       <option value="低">低</option>
@@ -84,7 +84,7 @@ require_once('config.php');
                       <button type="button" class="btn btn-info">戻る</button>
                     </a>
                     <input type="reset" class="btn btn-default" value="キャンセル">
-                    <input type="submit" class="btn btn-primary" value="登録">
+                    <input type="submit" class="btn btn-primary" value="登録" onClick="submit_chk()">
                   </div>
                 </div>
               </fieldset>

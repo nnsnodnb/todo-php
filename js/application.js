@@ -59,7 +59,7 @@ $(function() {
   });
 
   // ブラウザに関係なくカレンダー表示
-  $(window).bind("load", function(){
+  $(window).bind("load", function() {
     if(document.URL.match("task-add") || document.URL.match("view") || document.URL.match("edit")) {
       $("#datepicker").datepicker();
     }
@@ -111,4 +111,26 @@ function NowhichChk() {
     });
   }
 
+}
+
+// タスク登録未入力チェック
+function submit_chk() {
+  var flag = 0 ;
+
+  if (document.add.title_sub.value == "") {
+    flag++ ;
+  }
+  if (document.add.scheduled.value == "") {
+    flag++ ;
+  }
+  if (document.add.rank.value == "") {
+    flag++ ;
+  }
+
+  if (flag > 0) {
+    alert('必須項目に未入力がありました') ;
+    return false;
+  } else {
+    return true;
+  }
 }
