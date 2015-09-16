@@ -56,43 +56,6 @@ function chkClick_b() {
 　}
 }
 
-// 削除チェックボックスをクリックした時に呼び出される
-function whichChk() {
-
-  if ($('[class="chk"]:checked').prop('checked') == true) {
-    chkbox = $('[class="chk"]:checked').attr('id');
-    var strchk = chkbox.split('_');   // アンダーバーで分割
-    var tr_chk = strchk[1];           // 変数に代入（なくてもいいけどわかりやすい）
-
-    $(gl_chk[tr_chk]).change(function() {
-      if ($(this).is(':checked')) {
-        $(gl_sub[tr_chk]).removeAttr('disabled').focus();
-      } else {
-        $(gl_sub[tr_chk]).attr('disabled' , 'disabled');
-      }
-    });
-  }
-
-}
-
-function NowhichChk() {
-
-  if ($('[class="nochk"]:checked').prop('checked') == true) {
-    Nochkbox = $('[class="nochk"]:checked').attr('id');
-    var Nostrchk = Nochkbox.split('_');
-    var Notr_chk = Nostrchk[1];
-
-    $(Nogl_chk[Notr_chk]).change(function() {
-      if ($(this).is(':checked')) {
-        $(Nogl_sub[Notr_chk]).removeAttr('disabled').focus();
-      } else {
-        $(Nogl_sub[Notr_chk]).attr('disabled' , 'disabled');
-      }
-    });
-  }
-
-}
-
 // タスク登録未入力チェック
 function submit_chk() {
   var flag = 0 ;
