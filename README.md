@@ -13,6 +13,9 @@ PHPでToDo管理ツールを作りました！
 1. MySQLにログインしデータベース及びテーブルを作成
 
   ```bash
+  $ mysql -u <username> -p
+  mysql> CREATE DATABASE todo_php;
+  mysql> USE todo_php;
   mysql> source todo_php.sql;
   ```
 
