@@ -1,6 +1,6 @@
 <?php
 
-$dsn = 'mysql:host=localhost;dbname=todo_php';
+$dsn = 'mysql:host=127.0.0.1;dbname=todo_php';
 $user = 'root';
 $password = 'password';
 
