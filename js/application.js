@@ -35,6 +35,13 @@ $(function() {
     		return false;
     	});
 
+        // 完了にチェックをすることでの操作
+        $('.fini').change(function() {
+            link = $(this).attr('data-finish');
+            //console.log(data);
+            location.href="dbphp/complete.php?id=" + link;
+        });
+
     }
   });
 
@@ -46,15 +53,6 @@ $(function() {
   });
 
 });
-
-// 完了にチェックをすることでの操作
-function chkClick_b() {
-  if ($('[class="fini"]:checked').prop('checked') == true) {
-    //location.href="dbphp/complete.php";
-    link = $('[name="finishform_b"]').attr('action');
-    location.href=link;
-　}
-}
 
 // タスク登録未入力チェック
 function submit_chk() {
