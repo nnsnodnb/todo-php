@@ -167,12 +167,6 @@ require_once('config.php');
       </div>
     </div>
 
-    <div align="center" style="background-color: #2C3E50; margin-top:50px;">
-      <a href="#wrap" style="text-decoration: none;">
-        <button type="button" class="btn btn-primary btn-block">トップへ</button>
-      </a>
-    </div>
-
   </body>
 </html>
 
