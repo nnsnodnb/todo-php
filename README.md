@@ -54,7 +54,12 @@ PHPでToDo管理ツールを作りました！
 
 - 削除ボタンの横のチェックボックスの挙動がおかしい
 
-JavaScriptでの判定がおかしいようですが，私のスキルではもうどうしようもないです．Forkして修正していただけたら幸いです．
+### Issue [#2](https://github.com/nnsnodnb/todo-php/issues/2)
+
+[0579cff](https://github.com/nnsnodnb/todo-php/commit/0579cffe3ff03b464fdbfae559305473ac799ccd)
+
+- 完了ボタンを押した時に一番上のタスクが完了になるという事態が発生
+
 
 ## Author
 
