@@ -7,7 +7,7 @@ $password = 'password';
 $dbh = new PDO($dsn, $user, $password);
 $dbh->query('SET NAMES UTF8');
 
-define('SITE_URL' , 'http://localhost/todo-php') ;
+define('SITE_URL' , (empty($_SERVER["HTTPS"]) ? "http://" : "https://") . $_SERVER["HTTP_HOST”] . '/todo-php') ;
 
 error_reporting(E_ALL & ~E_NOTICE) ;
 
